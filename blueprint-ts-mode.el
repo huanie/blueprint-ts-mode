@@ -5,11 +5,10 @@
 ;; Author: Huan Thieu Nguyen <nguyenthieuhuan@gmail.com>
 ;; Maintainer: Huan Thieu Nguyen <nguyenthieuhuan@gmail.com>
 ;; Version: 0.0.1
-;; Package-Requires: ((emacs "29.0"))
 ;; URL: https://github.com/huanie/blueprint-ts-mode
 ;; Keywords: languages, blueprint, tree-sitter, gnome, gtk
-;; Created: 09 Sept 2023
-;; License: GPL v3.
+
+;; This file is not part of GNU Emacs.
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -27,7 +26,6 @@
 ;;; Commentary:
 
 ;; Treesitter based major mode for editing Blueprint files.
-
 ;; Blueprint is a new markup language for GTK4 user interfaces.  For more information see <https://jwestman.pages.gitlab.gnome.org/blueprint-compiler/>.
 ;; This mode provides syntax highlighting, eglot integration and Treesitter based navigation.
 
