@@ -7,7 +7,7 @@
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "29.0"))
 ;; URL: https://github.com/huanie/blueprint-ts-mode
-;; Keywords: languages blueprint tree-sitter gnome gtk
+;; Keywords: languages, blueprint, tree-sitter, gnome, gtk
 ;; Created: 09 Sept 2023
 ;; License: GPL v3.
 
