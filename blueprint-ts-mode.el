@@ -3,11 +3,13 @@
 ;; Copyright (C) 2023  Huan Thieu Nguyen
 
 ;; Author: Huan Thieu Nguyen <nguyenthieuhuan@gmail.com>
-;; Keywords: languages blueprint tree-sitter gnome gtk
+;; Maintainer: Huan Thieu Nguyen <nguyenthieuhuan@gmail.com>
 ;; Version: 0.0.1
 ;; Package-Requires: ((emacs "29.0"))
 ;; URL: https://github.com/huanie/blueprint-ts-mode
+;; Keywords: languages blueprint tree-sitter gnome gtk
 ;; Created: 09 Sept 2023
+;; License: GPL v3.
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
