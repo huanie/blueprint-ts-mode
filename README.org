@@ -4,7 +4,14 @@ Major mode for Blueprint ([[https://jwestman.pages.gitlab.gnome.org/blueprint-co
 * Installation
 You need Emacs version >= 29. Your Emacs also needs to be compiled with Treesitter support (~--with-tree-sitter~) which you can check with the variable ~system-configuration-options~.
 
-Install ~blueprint-ts-mode~ from NONGNU ELPA. ~package-install blueprint-ts-mode~.
+Get the grammar:
+#+begin_src emacs-lisp
+  (add-to-list 'treesit-language-source-alist
+               '(blueprint . (https://github.com/huanie/tree-sitter-blueprint)))
+  (treesit-install-language-grammar 'blueprint)
+#+end_src
+
+Install ~blueprint-ts-mode~ from NONGNU ELPA (not yet). ~package-install blueprint-ts-mode~.
 
 * Features
 - Font Lock
