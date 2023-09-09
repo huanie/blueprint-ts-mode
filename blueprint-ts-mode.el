@@ -1,9 +1,8 @@
-;;; blueprint-ts-mode.el --- Major mode for editing GNOME Blueprint files  -*- lexical-binding: t; -*-
+;;; blueprint-ts-mode.el --- tree-sitter support for Blueprint files  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2023  Huan Thieu Nguyen
+;; Copyright (C) 2023 Huan Thieu Nguyen
 
 ;; Author: Huan Thieu Nguyen <nguyenthieuhuan@gmail.com>
-;; Maintainer: Huan Thieu Nguyen <nguyenthieuhuan@gmail.com>
 ;; Version: 0.0.1
 ;; URL: https://github.com/huanie/blueprint-ts-mode
 ;; Keywords: languages, blueprint, tree-sitter, gnome, gtk
