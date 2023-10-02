@@ -4,6 +4,7 @@
 
 ;; Author: Huan Thieu Nguyen <nguyenthieuhuan@gmail.com>
 ;; Version: 0.0.1
+;; Package-Requires: ((emacs "29.1"))
 ;; URL: https://github.com/huanie/blueprint-ts-mode
 ;; Keywords: languages, blueprint, tree-sitter, gnome, gtk
 
