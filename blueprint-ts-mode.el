@@ -3,7 +3,7 @@
 ;; Copyright (C) 2023 Huan Thieu Nguyen
 
 ;; Author: Huan Thieu Nguyen <nguyenthieuhuan@gmail.com>
-;; Version: 0.0.1
+;; Version: 0.0.2
 ;; Package-Requires: ((emacs "29.1"))
 ;; URL: https://github.com/huanie/blueprint-ts-mode
 ;; Keywords: languages, blueprint, tree-sitter, gnome, gtk
@@ -26,28 +26,36 @@
 ;;; Commentary:
 
 ;; Treesitter based major mode for editing Blueprint files.
-;; Blueprint is a new markup language for GTK4 user interfaces.  For more information see <https://jwestman.pages.gitlab.gnome.org/blueprint-compiler/>.
-;; This mode provides syntax highlighting, eglot integration and Treesitter based navigation.
+
+;; Blueprint is a new markup language for GTK4 user interfaces.  For
+;; more information see
+;; <https://jwestman.pages.gitlab.gnome.org/blueprint-compiler/>.
+;; This mode provides syntax highlighting, eglot integration and
+;; Treesitter based navigation.
 
 ;;; Code:
 
 (require 'treesit)
-(require 'rx)
-(require 'eglot)
+(eval-when-compile (require 'rx))
+
+(defgroup blueprint ()
+  "Tree-sitter support for Blueprint files."
+  :prefix "blueprint-ts-"
+  :group 'languages)
 
 (defcustom blueprint-ts-mode-indent-offset 2
-  "Number of spaces for each indentation step in `json-ts-mode'."
-  :version "29.1"
+  "Number of spaces for each indentation step in `blueprint-ts-mode'."
   :type 'integer
-  :safe 'integerp
-  :group 'blueprint)
+  :safe #'integerp)
 
 (defvar blueprint-ts-mode--keywords
-  '("menu" "item" "section" "styles" "using" "bind" "template")
+  '("menu" "item" "section" "styles" "using" "bind" "template"
+    "bidirectional" "inverted" "no-sync-create")
   "Blueprint keywords for tree-sitter font-locking.")
 
 (defmacro blueprint-ts-mode--treesit-font-lock-rules (language &rest rules)
   "Wrapper around `treesit-font-lock-rules'.
+I don't like typing :language for every match rule.
 `LANGUAGE' is the treesitter language to use.
 `RULES' are the features and the match pattern."
   `(treesit-font-lock-rules ,@(seq-reduce
@@ -63,7 +71,7 @@
      ((node-is ")") parent-bol 0)
      ((node-is "]") parent-bol 0)
      ((n-p-gp "object" "child" "object_content")
-      prev-sibling 0) ;; [child_type] indent
+      prev-sibling 0) ;; [child_type] should be aligned with the upcoming object node.
      ((parent-is "object_content") parent-bol blueprint-ts-mode-indent-offset)
      ((parent-is "template") parent-bol blueprint-ts-mode-indent-offset)
      ((parent-is "styles") parent-bol blueprint-ts-mode-indent-offset)
@@ -80,6 +88,7 @@
    :feature 'comment
    '((comment) @font-lock-comment-face)
    :feature 'keyword
+   :override t
    `([,@blueprint-ts-mode--keywords] @font-lock-keyword-face)
    :feature 'number
    '([(number_literal _) (version)] @font-lock-number-face)
@@ -102,7 +111,6 @@
 ;;;###autoload
 (define-derived-mode blueprint-ts-mode prog-mode "Blueprint"
   "Blueprint major mode using treesitter."
-  :group 'blueprint
   (when (treesit-ready-p 'blueprint)
     (treesit-parser-create 'blueprint)
     ;; Comments
@@ -119,7 +127,6 @@
 		(rx (or "template" "object" "menu")))
     (setq-local treesit-sentence-type-regexp (rx (or "menu_attribute" "property")))
     ;; Font-lock
-    (setq-local treesit-font-lock-level 4)
     (setq-local treesit-font-lock-feature-list
 		'((comment variable)
 		  (string keyword type)
@@ -130,8 +137,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.blp\\'" . blueprint-ts-mode))
 (add-to-list 'eglot-server-programs
-             '(blueprint-ts-mode . ("blueprint-compiler" "lsp")))
-
+	     '(blueprint-ts-mode . ("blueprint-compiler" "lsp")))
 
 (provide 'blueprint-ts-mode)
 ;;; blueprint-ts-mode.el ends here

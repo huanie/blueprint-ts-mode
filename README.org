@@ -11,7 +11,7 @@ Get the grammar:
   (treesit-install-language-grammar 'blueprint)
 #+end_src
 
-Install ~blueprint-ts-mode~ from NONGNU ELPA (not yet). ~package-install blueprint-ts-mode~.
+Install ~blueprint-ts-mode~ from NONGNU ELPA. ~package-install blueprint-ts-mode~.
 
 * Features
 - Font Lock
@@ -20,3 +20,6 @@ Install ~blueprint-ts-mode~ from NONGNU ELPA (not yet). ~package-install bluepri
 - Treesitter based navigation
 
   These features still need improvement. Feedback and contributions are welcome!
+
+* Reporting Bugs
+Please make sure that you have the latest grammar installed from https://github.com/huanie/tree-sitter-blueprint.
