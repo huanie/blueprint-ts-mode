@@ -36,6 +36,7 @@
 ;;; Code:
 
 (require 'treesit)
+(require 'eglot)
 (eval-when-compile (require 'rx))
 
 (defgroup blueprint ()
