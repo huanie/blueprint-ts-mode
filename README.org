@@ -1,4 +1,4 @@
-#+html <a href="https://elpa.nongnu.org/nongnu/blueprint-ts-mode.html"><img src="https://elpa.nongnu.org/nongnu/blueprint-ts-mode.svg" alt="NONGNU ELPA" /></a>
+#+html: <a href="https://elpa.nongnu.org/nongnu/blueprint-ts-mode.html"><img src="https://elpa.nongnu.org/nongnu/blueprint-ts-mode.svg" alt="NONGNU ELPA" /></a>
 
 * blueprint-ts-mode
 Major mode for Blueprint ([[https://jwestman.pages.gitlab.gnome.org/blueprint-compiler/]]) based on Treesitter.
