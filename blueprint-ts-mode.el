@@ -3,7 +3,7 @@
 ;; Copyright (C) 2023 Huan Thieu Nguyen
 
 ;; Author: Huan Thieu Nguyen <nguyenthieuhuan@gmail.com>
-;; Version: 0.0.2
+;; Version: 0.0.3
 ;; Package-Requires: ((emacs "29.1"))
 ;; URL: https://github.com/huanie/blueprint-ts-mode
 ;; Keywords: languages, blueprint, tree-sitter, gnome, gtk
@@ -54,17 +54,16 @@
     "bidirectional" "inverted" "no-sync-create")
   "Blueprint keywords for tree-sitter font-locking.")
 
-(defmacro blueprint-ts-mode--treesit-font-lock-rules (language &rest rules)
-  "Wrapper around `treesit-font-lock-rules'.
-I don't like typing :language for every match rule.
-`LANGUAGE' is the treesitter language to use.
-`RULES' are the features and the match pattern."
-  `(treesit-font-lock-rules ,@(seq-reduce
-			       (lambda (accum element)
-				 (if (eq :feature element)
-				     (append accum `(:language ,language ,element))
-				   (append accum `(,element))))
-			       rules '())))
+(defun blueprint-ts-mode--treesit-font-lock-rules (language &rest rules)
+  "A wrapper for `treesit-font-lock-rules'.
+Saves me from writing :language `LANGUAGE' for every `RULES'."
+  (apply #'treesit-font-lock-rules
+	 (seq-reduce
+	  (lambda (query-specs keyword)
+	    (if (eq :feature keyword)
+		(append query-specs `(:language ,language ,keyword))
+	      (append query-specs `(,keyword))))
+	  rules '())))
 
 (defvar blueprint-ts-mode--indent-rules
   `((blueprint
@@ -78,7 +77,8 @@ I don't like typing :language for every match rule.
      ((parent-is "styles") parent-bol blueprint-ts-mode-indent-offset)
      ((parent-is "menu") parent-bol blueprint-ts-mode-indent-offset)
      ((parent-is "menu_child") parent-bol blueprint-ts-mode-indent-offset)
-     ((parent-is "child") no-indent blueprint-ts-mode-indent-offset))))
+     ((parent-is "child") no-indent blueprint-ts-mode-indent-offset)
+     ((parent-is "property") parent-bol 0))))
 
 (defvar blueprint-ts-mode--tresit-font-lock-setting
   (blueprint-ts-mode--treesit-font-lock-rules
