@@ -9,7 +9,7 @@ You need Emacs version >= 29. Your Emacs also needs to be compiled with Treesitt
 Get the grammar:
 #+begin_src emacs-lisp
   (add-to-list 'treesit-language-source-alist
-               '(blueprint . (https://github.com/huanie/tree-sitter-blueprint)))
+               '(blueprint . ("https://github.com/huanie/tree-sitter-blueprint")))
   (treesit-install-language-grammar 'blueprint)
 #+end_src
 
