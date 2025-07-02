@@ -6,10 +6,9 @@ Major mode for Blueprint ([[https://jwestman.pages.gitlab.gnome.org/blueprint-co
 * Installation
 You need Emacs version >= 29. Your Emacs also needs to be compiled with Treesitter support (~--with-tree-sitter~) which you can check with the variable ~system-configuration-options~.
 
-Get the grammar:
+On Emacs 30 and older (or Emacs 31 and newer, if ~treesit-auto-install-grammar~ is set to ~never~), there is an addition step to get the grammar:
 #+begin_src emacs-lisp
-  (add-to-list 'treesit-language-source-alist
-               '(blueprint . ("https://github.com/huanie/tree-sitter-blueprint")))
+  (require 'blueprint-ts-mode)
   (treesit-install-language-grammar 'blueprint)
 #+end_src
 
