@@ -39,6 +39,10 @@
 (require 'eglot)
 (eval-when-compile (require 'rx))
 
+(add-to-list
+ 'treesit-language-source-alist
+ '(blueprint "https://github.com/huanie/tree-sitter-blueprint"))
+
 (defgroup blueprint ()
   "Tree-sitter support for Blueprint files."
   :prefix "blueprint-ts-"
@@ -112,7 +116,9 @@ Saves me from writing :language `LANGUAGE' for every `RULES'."
 ;;;###autoload
 (define-derived-mode blueprint-ts-mode prog-mode "Blueprint"
   "Blueprint major mode using treesitter."
-  (when (treesit-ready-p 'blueprint)
+  (when (if (fboundp 'treesit-ensure-installed)
+            (treesit-ensure-installed 'blueprint)
+          (treesit-ready-p 'blueprint))
     (treesit-parser-create 'blueprint)
     ;; Comments
     (setq-local comment-start "// ")
