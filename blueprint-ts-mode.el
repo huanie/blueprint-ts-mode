@@ -136,7 +136,9 @@ Saves me from writing :language `LANGUAGE' for every `RULES'."
     (setq-local treesit-font-lock-settings blueprint-ts-mode--tresit-font-lock-setting)
     (treesit-major-mode-setup)))
 
+;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.blp\\'" . blueprint-ts-mode))
+
 (add-to-list 'eglot-server-programs
 	     '(blueprint-ts-mode . ("blueprint-compiler" "lsp")))
 
